@@ -1,0 +1,31 @@
+{
+  "name": "nodejsapp",
+  "version": "1.0.0",
+  "description": "NodeJS Frontend w/ MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dekay27/nodejsapp.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mongodb",
+    "vscode"
+  ],
+  "author": "Daniel Kumah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dekay27/nodejsapp/issues"
+  },
+  "homepage": "https://github.com/Dekay27/nodejsapp#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "morgan": "^1.10.0"
+  }
+}
