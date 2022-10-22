@@ -1,4 +1,6 @@
-import Employee from '../models/Employee';
+const mongoose      =   require('mongoose')
+const Employee      = require('../models/Employee')
+
 
 // SHOW LIST OF EMPLOYEES
 const index = (req, res, next) => {
@@ -15,10 +17,11 @@ const index = (req, res, next) => {
     })
 }
 
+
 // FIND ONE EMPLOYEE BY ID
 const show = (req, res, next) => {
-    let employeeID = req.body.employeeID
-    employeeID.findById(employeeID)
+    let employeeID = new mongoose.Types.ObjectId(req.body.employeeID)
+    Employee.findById(employeeID)
     .then(response => {
         res.json({
             response
@@ -55,7 +58,7 @@ const store = (req, res, next) => {
 
 // UPDATE AN EMPLOYEE
 const update = (req, res, next) => {
-    let employeeID = req.body.employeeID
+    let employeeID = new mongoose.Types.ObjectId(req.body.employeeID)
 
     let updatedData = {
         name: req.body.name,
@@ -80,10 +83,10 @@ const update = (req, res, next) => {
 
 // DELETE AN EMPLOYEE
 const destroy = (req, res, next) => {
-    let employeeID = req.body.employeeID
-    Employee.findOneAndRemove(employeeID)
+    let employeeID = new mongoose.Types.ObjectId(req.body.employeeID)
+    Employee.findByIdAndDelete(employeeID)
     .then(() => {
-        req.json({
+        res.json({
             message: 'Employee deleted successfully'
         })
     })

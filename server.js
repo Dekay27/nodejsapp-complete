@@ -3,7 +3,9 @@ const mongoose      =   require('mongoose');
 const morgan        =   require('morgan');
 const bodyParser    =   require('body-parser');
 
-mongoose.connect('mongodb+srv://dekayroot:12341234@cluster0.514jnqu.mongodb.net/test')
+const EmployeeRoute = require('./routes/employee')
+
+mongoose.connect('mongodb+srv://dekayroot:12341234@cluster0.514jnqu.mongodb.net/nodejsapp')
 const db = mongoose.connection
 
 db.on('error', (err) => {
@@ -16,12 +18,14 @@ db.once('open', () => {
 
  const app = express()
 
- app.use(morgan('dev'))
+app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 const PORT  =   process.env.PORT || 3000
 
 app.listen(PORT, () =>{
-    console.log('Server is running on port ${PORT}')
+    console.log('Server is running on port %i', PORT)
 })
+
+app.use('/api/employee', EmployeeRoute)
