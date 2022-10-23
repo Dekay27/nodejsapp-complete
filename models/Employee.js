@@ -17,6 +17,9 @@ const employeeSchema    =   new Schema({
     },
     age: {
         type: Number
+    },
+    avatar: {
+        type: String
     }
 }, {timestamps: true})
 
