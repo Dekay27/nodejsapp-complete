@@ -53,6 +53,7 @@ const store = (req, res, next) => {
         })
     })
     .catch(error => {
+        console.log(error)
          res.json({
             message: 'Error Encountered'
          })
