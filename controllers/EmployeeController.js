@@ -60,6 +60,37 @@ const store = (req, res, next) => {
     })
 }
 
+// STORE AN EMPLOYEE RECORD WITH MULTIPLE FILES
+const storemore = (req, res, next) => {
+    let employee = new Employee({
+        name: req.body.name,
+        designation: req.body.designation,
+        email: req.body.email,
+        phone: req.body.phone,
+        age: req.body.age
+    })
+    if(req.files){
+        let path = ''
+        req.files.foreach(function(files, index, arr){
+            path = path + files.path + ','
+        })
+        path = path.substring(0, path.lastIndexOf(", "))
+        employee.avatar = path
+    }
+    employee.save()
+    .then(response => {
+        res.json({
+            message: 'Employee with Multiple Avatars Added Successfully'
+        })
+    })
+    .catch(error => {
+        console.log(error)
+         res.json({
+            message: 'Error Encountered'
+         })
+    })
+}
+
 // UPDATE AN EMPLOYEE
 const update = (req, res, next) => {
     let employeeID = new mongoose.Types.ObjectId(req.body.employeeID)
@@ -103,5 +134,5 @@ const destroy = (req, res, next) => {
 
 
 module.exports = {
-    index, show, store, update, destroy
+    index, show, store, update, destroy, storemore
 }
