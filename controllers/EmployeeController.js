@@ -1,5 +1,5 @@
 const mongoose      =   require('mongoose')
-const Employee      = require('../models/Employee')
+const Employee      =   require('../models/Employee')
 
 
 // SHOW LIST OF EMPLOYEES
@@ -69,6 +69,9 @@ const storemore = (req, res, next) => {
         phone: req.body.phone,
         age: req.body.age
     })
+
+    // this part is not working
+    // says foreach() is not a valid function
     if(req.files){
         let path = ''
         req.files.foreach(function(files, index, arr){
