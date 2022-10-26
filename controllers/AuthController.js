@@ -31,6 +31,45 @@ const jwt       = require('jsonwebtoken')
     })
  }
 
+const login = (req, res, next) => {
+    let username = req.body.username
+    let password = req.body.password
+
+    User.findOne({$or: [{email: username}, {phone: username}]})     // checks if user exists
+    .then(user => {
+        if(user){
+            bcrypt.compare(password, user.password, function(err, result){      // checks to see if password matches in database
+                if(err){
+                    res.json({
+                        error: err
+                    })
+                }
+                if(result){
+                    let token = jwt.sign({name: user.name}, 'verySecretKey', {expiresIn: '30s'})     // create a token that expires in one hour
+                    let refreshToken = jwt.sign({name: user.name}, 'thesecrettoken', {expiresIn: '1h'})
+                    res.status(200).json({
+                         message: "Login successful",
+                        token,
+                        refreshToken
+                    })
+                }else{
+                    res.status(200).json({
+                        message: "Password incorrect, try again"
+                    })
+                }
+            })
+
+        // if user does not exist
+        }else{
+            res.status(200).json({
+                message: "No such user!"
+            })
+        }
+    })
+
+}
+
+
  module.exports = {
-    register
+    register, login
  }

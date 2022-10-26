@@ -5,6 +5,7 @@ const bodyParser    =   require('body-parser');
 
 const EmployeeRoute = require('./routes/employee')
 const AuthRoute     = require('./routes/auth')
+const authenticate  = require('./middleware/authenticate')
 
 mongoose.connect('mongodb+srv://dekayroot:12341234@cluster0.514jnqu.mongodb.net/nodejsapp')
 const db = mongoose.connection
