@@ -77,7 +77,7 @@ const refreshToken = (req, res, next) => {
                 err
             })
         }else{
-            let token = jwt.sign({name: decode.name}, ACCESS_TOKEN_SECRET, {expiresIn: process.env.ACCESS_TOKEN_EXPIRE_TIME})
+            let token = jwt.sign({name: decode.name}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: process.env.ACCESS_TOKEN_EXPIRE_TIME})
             let refreshToken = req.body.refreshToken
             res.status(200).json({
                 message: "Login successful",
